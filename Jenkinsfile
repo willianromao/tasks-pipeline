@@ -11,7 +11,9 @@ pipeline {
 		}
 		stage ('tasks-backend: Unit Tests') {
 			steps {
-				bat 'mvn test'
+				dir('tasks-backend') {
+					bat 'mvn test'
+				}
 			}
 		}
 		stage ('tasks-backend: Sonar Analysis') {
@@ -20,7 +22,9 @@ pipeline {
 			}
 			steps {
 				withSonarQubeEnv('SONAR_REMOTE') {
-					bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=tasks-backend -Dsonar.host.url=http://52.250.57.59:9000 -Dsonar.login=f6ddd287d8e614d2856116cd494bba0ef62dfdaf -Dsonar.java.binaries=target"
+					dir('tasks-backend') {
+						bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=tasks-backend -Dsonar.host.url=http://52.250.57.59:9000 -Dsonar.login=f6ddd287d8e614d2856116cd494bba0ef62dfdaf -Dsonar.java.binaries=target"
+					}
 				}
 			}
 		}
@@ -34,7 +38,9 @@ pipeline {
 		}
 		stage ('tasks-backend: Deploy') {
 			steps {
-				deploy adapters: [tomcat8(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8001/')], contextPath: 'tasks-backend', onFailure: false, war: 'target/tasks-backend.war'
+				dir('tasks-backend') {
+					deploy adapters: [tomcat8(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8001/')], contextPath: 'tasks-backend', onFailure: false, war: 'target/tasks-backend.war'
+				}
 			}
 		}
 		stage ('tasks-backend: API Test') {
