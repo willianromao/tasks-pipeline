@@ -73,7 +73,7 @@ pipeline {
 			steps {
 				withSonarQubeEnv('SONAR_REMOTE') {
 					dir('tasks-frontend') {
-						bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=tasks-frontend -Dsonar.host.url=http://52.250.57.59:9000 -Dsonar.login=f6ddd287d8e614d2856116cd494bba0ef62dfdaf -Dsonar.java.binaries=target"
+						bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=tasks-frontend -Dsonar.host.url=http://52.250.57.59:9000 -Dsonar.login=96aef74ef8014ee3ba36bc19c28809677f0cd731 -Dsonar.java.binaries=target"
 					}
 				}
 			}
@@ -89,7 +89,7 @@ pipeline {
 		stage ('tasks-frontend: Deploy') {
 			steps {
 				dir('tasks-frontend') {
-					deploy adapters: [tomcat8(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8001/')], contextPath: 'tasks-frontend', onFailure: false, war: 'target/tasks-frontend.war'
+					deploy adapters: [tomcat8(credentialsId: 'tomcatadmin', path: '', url: 'http://localhost:8001/')], contextPath: 'tasks', onFailure: false, war: 'target/tasks.war'
 				}
 			}
 		}
