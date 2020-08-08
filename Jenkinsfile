@@ -3,7 +3,9 @@ pipeline {
 	stages {
 		stage ('tasks-backend: Build') {
 			steps {
-				bat 'mvn clean package -DskipTests=true'
+				dir('tasks-backend') {
+					bat 'mvn clean package -DskipTests=true'
+				}
 			}
 		}
 		stage ('tasks-backend: Unit Tests') {
