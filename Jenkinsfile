@@ -93,12 +93,17 @@ pipeline {
 				}
 			}
 		}
-		stage ('tasks-backend: Funcional Tests') {
+		stage ('tasks-frontend: Funcional Tests') {
 			steps {
 				dir('tasks-funcional-tests') {
 					git 'https://github.com/willianromao/tasks-functional-tests.git'
 					bat 'mvn test'
 				}
+			}
+		}
+		stage ('Production Environment') {
+			steps {
+				bat 'docker-compose up -d'
 			}
 		}
 	}
