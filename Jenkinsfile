@@ -4,6 +4,7 @@ pipeline {
 		stage ('tasks-backend: Build') {
 			steps {
 				dir('tasks-backend') {
+					git 'https://github.com/willianromao/tasks-backend.git'
 					bat 'mvn clean package -DskipTests=true'
 				}
 			}
