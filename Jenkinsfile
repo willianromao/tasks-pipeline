@@ -47,7 +47,7 @@ pipeline {
 			steps {
 				dir('tasks-api-test') {
 					git 'https://github.com/willianromao/tasks-api-test.git'
-					bat 'mvn test'
+					bat 'mvn clean test'
 				}
 			}
 		}
@@ -97,7 +97,7 @@ pipeline {
 			steps {
 				dir('tasks-funcional-tests') {
 					git 'https://github.com/willianromao/tasks-functional-tests.git'
-					bat 'mvn test'
+					bat 'mvn clean test'
 				}
 			}
 		}
