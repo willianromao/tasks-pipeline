@@ -58,3 +58,4 @@ networks:
 
 volumes:
   prod_postgresql_data:
+    external: true
