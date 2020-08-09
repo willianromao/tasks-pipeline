@@ -106,5 +106,13 @@ pipeline {
 				bat 'docker-compose up -d --build'
 			}
 		}
+		stage ('Health Check') {
+			steps {
+				dir('tasks-health-check') {
+					git 'https://github.com/willianromao/tasks-health-check.git'
+					bat 'mvn clean verify'
+				}
+			}
+		}
 	}
 }
