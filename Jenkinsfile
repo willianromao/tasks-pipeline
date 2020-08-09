@@ -108,6 +108,7 @@ pipeline {
 		}
 		stage ('Health Check') {
 			steps {
+				sleep(10)
 				dir('tasks-health-check') {
 					git 'https://github.com/willianromao/tasks-health-check.git'
 					bat 'mvn clean verify'
