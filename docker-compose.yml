@@ -57,5 +57,4 @@ networks:
   prod_net_back:
 
 volumes:
-  prod_postgresql:
   prod_postgresql_data:
